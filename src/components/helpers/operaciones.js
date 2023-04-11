@@ -121,6 +121,7 @@ export const operaciones = (mensaje, setMensaje) => {
         return (
           parseFloat(valorSeparado[0]) % parseFloat(valorSeparado[1])
         ).toString();
+      default: return msj;
     }
   };
   /**
