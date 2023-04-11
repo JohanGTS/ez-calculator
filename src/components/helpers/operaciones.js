@@ -20,26 +20,11 @@ export const operaciones = (mensaje, setMensaje) => {
    * nulo, NaN o un mensaje personalizado
    * @returns {Boolean} valor que espeficica si contiene algo de lo anterior
    */
-  const noEsValido = () => {
-    return (
-      mensaje === "" ||
-      mensaje == null ||
-      mensaje == undefined ||
-      mensaje.includes("NaN") ||
-      mensaje.includes("No se puede")
-    );
-  };
-  /**
-   * Se utiliza para saber si el mensaje que contiene actualmente la pantalla no está vacío,
-   * nulo, NaN o un mensaje personalizado
-   * @deprecated en la próxima actualización de optimización de código será removida
-   * @param {String} msj mensaje a verificar la validez
-   * @returns {Boolean} valor que espeficica si contiene algo de lo anterior
-   */
-  const noEsValidoMsj = (msj) => {
+  const noEsValido = (msj=mensaje) => {
     return (
       msj === "" ||
       msj == null ||
+      msj == undefined ||
       msj.includes("NaN") ||
       msj.includes("No se puede")
     );
@@ -60,35 +45,22 @@ export const operaciones = (mensaje, setMensaje) => {
    * @see encontrarOperador
    */
 
-  const agregarPunto = () => {
+  const agregarPunto = (msj=mensaje) => {
     if (noEsValido()) return agregarValor("0."); //Si se desea poner primero un punto, agrega un 0 para evitar que se rompa el programa
 
-    const operador = encontrarOperador(mensaje);
+    const operador = encontrarOperador(msj);
     if (operador != "undefined" && operador != null) {
-      const valorSeparado = mensaje.split(operador);
+      const valorSeparado = msj.split(operador);
 
-      const segundoValor = agregarPuntoMultiple(valorSeparado[1]); //Se agrega punto para el segundo valor
+      const segundoValor = agregarPunto(valorSeparado[1]); //Se agrega punto para el segundo valor
       borrarTodo(); //segundovalor contiene el primer valor, el operador y el segundo valor con el punto
       return segundoValor;
     }
 
-    if (mensaje.includes(".")) return mensaje; //Si contiene un . no hace nada
+    if (msj.includes(".")) return msj; //Si contiene un . no hace nada
     return agregarValor(".");
   };
 
-  /**
-   * Se utiliza para agregar un punto en la pantalla, en donde se verifica la posición en que será
-   * puesto en donde se siguen reglas para evitar errores matemáticos
-   * @deprecated en la próxima actualización de optimización de código será removida
-   * @param {String} valor Valor al que será agregado un punto
-   * @returns {String} Nuevo mensaje con el punto y reglas si lleva
-   */
-
-  const agregarPuntoMultiple = (valor) => {
-    if (noEsValido()) return agregarValor("0.");
-    if (valor.includes(".")) return valor;
-    return agregarValor(".");
-  };
   /**
    * Se utiliza para agregar un operador en la pantalla, en donde se evita la presencia
    * de múltiples operadores, además de que se evitan errores matemáticos de operadores
@@ -119,7 +91,7 @@ export const operaciones = (mensaje, setMensaje) => {
     if (noEsValido()){
       return msj;}
     const valorSeparado = msj.split(operador);
-    if (noEsValidoMsj(valorSeparado[1])) {
+    if (noEsValido(valorSeparado[1])) {
       valorSeparado[1] = "0";
     }
     switch (operador) {
