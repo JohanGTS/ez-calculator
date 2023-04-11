@@ -9,7 +9,7 @@ const PanelLateral = ({mensaje,setMensaje}) => {
         <Boton nombre={"x"} funcion={()=>setMensaje(agregarOperador("x"))}/>
         <Boton nombre={"+"} funcion={()=>setMensaje(agregarOperador("+"))}/>
         <Boton nombre={"-"} funcion={()=>setMensaje(agregarOperador("-"))}/>
-        <Boton nombre={"="} funcion={()=>setMensaje(resolverOperacion())}/>
+        <Boton nombre={"="} funcion={()=>setMensaje(resolverOperacion(mensaje))}/>
     </div>
   )
 }

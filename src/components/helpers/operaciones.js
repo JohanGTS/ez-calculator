@@ -24,6 +24,7 @@ export const operaciones = (mensaje, setMensaje) => {
     return (
       mensaje === "" ||
       mensaje == null ||
+      mensaje == undefined ||
       mensaje.includes("NaN") ||
       mensaje.includes("No se puede")
     );
@@ -96,13 +97,15 @@ export const operaciones = (mensaje, setMensaje) => {
    * @returns {String} Mensaje con operador agregado
    */
   const agregarOperador = (operador) => {
-    if (noEsValido()) mensaje = "0"; //Se agrega 0 para evitar error matemático y error del .includes()
+    if (noEsValido()&&operador!="-") mensaje = "0"; //Se agrega 0 para evitar error matemático y error del .includes()
+    const actualizaPantalla= encontrarOperador(mensaje);
+    if (operadores.includes(actualizaPantalla))
+      mensaje=resolverOperacion(mensaje)
     if (operadores.some((v) => mensaje.includes(v))) {
       if(mensaje[0]!="-")
         mensaje = borrar();
       return agregarValor(operador);
     }
-
     return agregarValor(operador);
   };
 
@@ -111,10 +114,11 @@ export const operaciones = (mensaje, setMensaje) => {
    * el operador presente
    * @returns {number} Resultado de la operación
    */
-  const resolverOperacion = () => {
-    const operador = encontrarOperador(mensaje);
-    if (noEsValido()) return mensaje;
-    const valorSeparado = mensaje.split(operador);
+  const resolverOperacion = (msj) => {
+    const operador = encontrarOperador(msj);
+    if (noEsValido()){
+      return msj;}
+    const valorSeparado = msj.split(operador);
     if (noEsValidoMsj(valorSeparado[1])) {
       valorSeparado[1] = "0";
     }
