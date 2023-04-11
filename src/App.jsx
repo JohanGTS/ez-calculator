@@ -8,8 +8,7 @@ import PanelLateral from './components/PanelLateral.jsx'
 
 function App() {
   const [mensaje, setMensaje] = useState("")
-  const { handleChange, agregarValor, borrar, agregarPunto, agregarOperador, resolverOperacion } = operaciones(mensaje, setMensaje);
-//
+  
   return (
     <div className="App">
       <Pantalla mensaje={mensaje} setMensaje={setMensaje}/>

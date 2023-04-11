@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState } from 'react'
 import Boton from './Boton.jsx'
 import { operaciones } from './helpers/operaciones.js'
 import "./PanelPrincipal.css"
 const PanelPrincipal = ({mensaje, setMensaje}) => {
-  const { handleChange, agregarValor, borrar, agregarPunto, agregarOperador, resolverOperacion } = operaciones(mensaje, setMensaje);
-  //console.log(mensaje)
+  const { agregarValor, agregarPunto} = operaciones(mensaje, setMensaje);
   return (
     <div className='gridContenedor'>
         <Boton nombre={"7"} funcion={()=>setMensaje(agregarValor("7"))}/>

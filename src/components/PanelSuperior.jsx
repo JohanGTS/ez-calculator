@@ -5,7 +5,7 @@ import "./PanelPrincipal.css"
 import { operaciones } from './helpers/operaciones.js'
 const PanelSuperior = ({mensaje,setMensaje}) => {
 
-const { handleChange, agregarValor, borrar, agregarPunto, agregarOperador, resolverOperacion,borrarTodo } = operaciones(mensaje, setMensaje);
+const { borrar, agregarOperador,borrarTodo } = operaciones(mensaje, setMensaje);
 
   return (
     <div className='gridContenedor'>
