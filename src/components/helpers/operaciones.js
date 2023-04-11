@@ -22,7 +22,7 @@ export const operaciones = (mensaje, setMensaje) => {
    */
   const noEsValido = (msj=mensaje) => {
     return (
-      msj === "" ||
+      msj == "" ||
       msj == null ||
       msj == undefined ||
       msj.includes("NaN") ||
@@ -121,7 +121,8 @@ export const operaciones = (mensaje, setMensaje) => {
         return (
           parseFloat(valorSeparado[0]) % parseFloat(valorSeparado[1])
         ).toString();
-      default: return msj;
+      default: 
+        return msj;
     }
   };
   /**
@@ -131,7 +132,8 @@ export const operaciones = (mensaje, setMensaje) => {
    * undefined
    */
   const encontrarOperador = (valores) => {
-    if (valores == null || valores === "") return " ";
+    if (valores == null || valores === "") 
+      return " ";
     if(valores[0]=="-")
       valores=valores.slice(1, -1)
     return operadores.find((operador) => valores.includes(operador));
